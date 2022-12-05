@@ -15,7 +15,7 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 	accessToken: API_KEY
 });
 
-// We add a 3rd map style as a layer that can be selected - Navigation Night
+// We add a third map style as a layer that can be selected - Navigation Night
 let navNight = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
 	maxZoom: 18,
@@ -144,12 +144,12 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   // 5. Change the color function to use three colors for the major earthquakes based on the magnitude of the earthquake.
   function getColor(magnitude) {
     if (magnitude > 6.0) {
-      return "#c51b8a";
+      return "#ce1515";
     }
     if (magnitude > 5.0) {
-      return "#ea2c2c";
+      return "#ff8c00";
     }
-    return "#ea822c";
+    return "#e9d66b";
   }
   
   // 6. Use the function that determines the radius of the earthquake marker based on its magnitude.
@@ -181,7 +181,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 });
 
 
-// Create a legend control object.
+// Here we create a legend control object.
 let legend = L.control({
   position: "bottomright"
 });
@@ -210,12 +210,13 @@ legend.onAdd = function() {
     return div;
 };
 
-// Add our legend to the map.
+// Finally, we add our legend to the map.
 legend.addTo(map);
 
 // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
 d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
     
+  // Create a GeoJSON layer with the retrieved data.
   L.geoJSON(data, {
         color: "red",
         weight: 2 
